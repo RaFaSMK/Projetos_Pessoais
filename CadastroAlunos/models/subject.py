@@ -1,7 +1,7 @@
+from models.teacher import Teacher
+
 class Subject:
-    def __init__(self,subject_id: int, name: str):
+    def __init__(self, teacher: Teacher, subject_id: int, name: str):
+        self.teacher = teacher
         self.subject_id = subject_id
         self.name = name
-    
-    def __str__(self):
-        return f"Subject ID: {self.subject_id} - {self.name}"
