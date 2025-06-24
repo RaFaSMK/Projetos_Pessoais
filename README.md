@@ -19,6 +19,7 @@ Simulação de um sistema simples de vendas ou estoque para uma mercearia. Pode 
 
 ### 🎓 Cadastro_Alunos
 Sistema em andamento para cadastro de alunos, com funcionalidades de adição, listagem, busca e remoção. Utilizando arquivos TxT.
+
 ---
 
 <!--## 📁 Organização
