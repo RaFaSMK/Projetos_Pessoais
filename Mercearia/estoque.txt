@@ -1,0 +1,3 @@
+Mamao|9090|Fruta|999999999999999998
+Pera|99|Fruta|89999
+Queijo|90|Frios|100

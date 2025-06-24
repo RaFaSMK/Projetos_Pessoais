@@ -1,0 +1,5 @@
+Mamao|90|Fruta|Mariana|Jose Alcino|1|04/06/2025
+Mamao|90|Fruta|Mariana|Jose Aldo|1|04/06/2025
+Mamao|9090|Fruta|Mariana|Jose Aldo|1|04/06/2025
+Pera|99|Fruta|Mariana|Jose Aldo|1|04/06/2025
+Mamao|9090|Fruta|Mariana|Jose Aldo|1|04/06/2025
