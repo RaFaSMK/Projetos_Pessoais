@@ -1,47 +1,67 @@
+from model import Usuario
 from sqlalchemy.orm import sessionmaker
-from model import Usuario, engine
+from sqlalchemy import create_engine
 import bcrypt
+import hashlib
 
-Session = sessionmaker(bind=engine)
-session = Session()
+def retorna_session():
+    USUARIO = "root"
+    SENHA = ""
+    HOST = "localhost"
+    BANCO = "login"
+    PORT = "3306"
+
+    CONN = f"mysql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
+
+    engine = create_engine(CONN, echo=True)
+    
+    Session = sessionmaker(bind=engine)
+    return Session()
 
 class ControllerCadastro:
-    def verificarSenha(self,senha):
-        if len(senha) < 8 or not any(char in senha for char in "@#$%"):
-            return "A senha deve conter no mínimo 8 caractéres e um símbolo (@,#,$,%)!"
-        return senha
-
-    def criptografarSenha(self, senha):
-        senha_valida = self.verificarSenha(senha)
-        if senha_valida != senha:
-            return senha_valida  # retorna mensagem de erro
-        salt = bcrypt.gensalt()
-        return bcrypt.hashpw(senha.encode('utf-8'), salt).decode('utf-8')
+    @classmethod
+    def verifica_dados(cls, nome, email, senha):
+        if len(nome) > 50 or len(nome) < 3:
+            return 2
+        if len(email) > 200:
+            return 3
+        if len(senha) > 100 or len(senha) < 8:
+            return 4
     
-    @staticmethod
-    def verificar_senha(senha, hash_senha):
-        return bcrypt.checkpw(senha.encode('utf-8'), hash_senha.encode('utf-8'))
+        return 1
+    
+    @classmethod
+    def cadastrarUsuario(cls,nome,email,senha):
+        session = retorna_session()
+        usuario = session.query(Usuario).filter(Usuario.email == email).all()
 
-    def cadastrarUsuario(self,nomeCadastrar,emailCadastrar,senhaCadastrar):
+        if len(usuario) > 0:
+            return 5
+
+        dados_verificados = cls.verifica_dados(nome,email,senha)
+
+        if dados_verificados != 1:
+            return dados_verificados
+
+        try:
+            senha = hashlib.sha256(senha.encode()).hexdigest()
+            x = Usuario(nome = nome,email = email,senha = senha)
+            session.add(x)
+            session.commit()
+            return 1
+
+        except:
+            return 6
         
-        emailCadastrar = emailCadastrar.strip().lower()
-        senhaCriptoGrafada = self.criptografarSenha(senhaCadastrar)
-
-        if senhaCriptoGrafada.startswith("A senha"):
-            return senhaCriptoGrafada
-
-        x = Usuario(nome = nomeCadastrar,
-                    email = emailCadastrar,
-                    senha = senhaCriptoGrafada)
-
-        session.add(x)
-        session.commit()
-
-class ControllerLogin(ControllerCadastro):
-    def verificarLogin(self,emailLogin,senhaLogin):
-        user = session.query(Usuario).filter(Usuario.email == emailLogin).first()
-
-        if user and self.verificar_senha(senhaLogin,user.senha):
-            return "Login efetuado com sucesso!"
+class ControllerLogin():
+    @classmethod
+    def login(cls,email,senha):
+        session = retorna_session()
+        senha = hashlib.sha256(senha.encode()).hexdigest()
+        
+        logado = session.query(Usuario).filter(Usuario.email == email).filter(Usuario.senha == senha).all()
+        
+        if len(logado) == 1:
+            return {'logado' : True, 'id': logado[0].id}
         else:
-            return "E-mail não cadastrado"
+            return False
