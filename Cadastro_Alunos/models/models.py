@@ -34,12 +34,14 @@ class Subject(Base):
     id = Column(Integer(),primary_key=True)
     name = Column(String(50))
     teacher_id = Column(Integer(),ForeignKey("teacher.id"))
+    student_id = Column(Integer(),ForeignKey("student.id"))
 
 class Grade(Base):
       __tablename__ = "grade"
       id = Column(Integer(),primary_key=True)
       student_id = Column(Integer(),ForeignKey("student.id"))
       subject_id = Column(Integer,ForeignKey("subject.id"))
-      subject_grade = Column(Float(2,1))
+      subject_grade_1_sem = Column(Float(2,1))
+      subject_grade_2_sem = Column(Float(2,1))
 
 Base.metadata.create_all(engine)
