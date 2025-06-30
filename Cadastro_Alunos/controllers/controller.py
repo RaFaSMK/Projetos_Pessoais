@@ -86,23 +86,29 @@ class ControllerGrade:
     
         session.add(grade)
 
-    def alterGrade(grade_id, student_id_alter, subject_grade_1_sem_alter, subject_grade_2_sem_alter):
+    def alterGrade(grade_id, student_id_alter, subject_grade_1_bim_alter, subject_grade_2_bim_alter, subject_grade_3_bim_alter, subject_grade_4_bim_alter):
 
         alter = session.query(Grade).filter(Grade(id) == grade_id).all()
 
         alter[0].student_id = student_id_alter
-        alter[0].subject_grade_1_sem = subject_grade_1_sem_alter
-        alter[0].subject_grade_2_sem = subject_grade_2_sem_alter
+        alter[0].subject_grade_1_bim = subject_grade_1_bim_alter
+        alter[0].subject_grade_2_bim = subject_grade_2_bim_alter
+        alter[0].subject_grade_3_bim = subject_grade_3_bim_alter        
+        alter[0].subject_grade_4_bim = subject_grade_4_bim_alter
 
     def calculateAverage(grade_id_avg):
 
-        grade_1_sem_Avg = session.query(Grade).filter(Grade(id) == grade_id_avg).filter(Grade(grade_1_sem_Avg)).first()
-        grade_2_sem_Avg = session.query(Grade).filter(Grade(id) == grade_id_avg).filter(Grade(grade_2_sem_Avg)).first()
+        # Reescrever
 
-        avg = grade_1_sem_Avg.subject_grade_1_sem + grade_2_sem_Avg.id ## Revisar
+        grade_1_bim_Avg = session.query(Grade).filter(Grade(id) == grade_id_avg).filter(Grade(grade_1_bim_Avg)).first()
+        grade_2_bim_Avg = session.query(Grade).filter(Grade(id) == grade_id_avg).filter(Grade(grade_2_bim_Avg)).first()
+
+        avg = grade_1_bim_Avg.subject_grade_1_bim + grade_2_bim_Avg.subject_grade_2_bim
 
         return avg
     
+class ControllerSchoolCard:
+
     def listAll():
         pass
 
