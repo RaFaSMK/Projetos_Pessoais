@@ -8,7 +8,7 @@ HOST = "localhost"
 BANCO = "cadastro_alunos"
 PORT = "5432"
 
-CONN = f"postgresql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
+CONN = f"postgresql+psycopg2://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
 engine = create_engine(CONN, echo=True)
 
 Base = declarative_base()
@@ -41,9 +41,9 @@ class Grade(Base):
       id = Column(Integer(),primary_key=True)
       student_id = Column(Integer(),ForeignKey("student.id"))
       subject_id = Column(Integer,ForeignKey("subject.id"))
-      subject_grade_1_bim = Column(Float(2,1))
-      subject_grade_2_bim = Column(Float(2,1))
-      subject_grade_3_bim = Column(Float(2,1))
-      subject_grade_4_bim = Column(Float(2,1))
+      subject_grade_1_bim_1_sem = Column(Float(2,1))
+      subject_grade_2_bim_1_sem = Column(Float(2,1))
+      subject_grade_1_bim_2_sem = Column(Float(2,1))
+      subject_grade_2_bim_2_sem = Column(Float(2,1))
 
 Base.metadata.create_all(engine)
