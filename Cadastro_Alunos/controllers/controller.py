@@ -4,7 +4,9 @@ from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=engine)
 session = Session()
 
+
 class ControllerStudent:
+    @staticmethod
     def registerStudent(nameRegister,cpfRegister,adressRegister,phone_numberRegister):
 
         student = Student(name = nameRegister,
@@ -13,22 +15,24 @@ class ControllerStudent:
                           phone_number = phone_numberRegister)
         
         session.add(student)
+        session.commit()
 
+    @staticmethod
     def listAll():
         studentList = session.query(Student).all()
         result = []
 
         for i in studentList:
-            result.append(f"ID: '{i.id}'", f"Name: '{i.name}'", f"CPF: '{i.cpf}'", f"Adress: '{i.adress}'", f"Phone Number: '{i.phone_number}'","\n")
+            result.append(f"[ID: '{i.id}' Name: '{i.name}' CPF: '{i.cpf}' Adress: '{i.adress}' Phone Number: '{i.phone_number}']")
 
-        return result
+        return "\n".join(result)
     
+    @staticmethod
     def idSearch(student_id):
 
-        student = session.query(Student).filter(Student(id) == student_id).all()
+        student = session.query(Student).filter(Student.id == student_id).first()
 
-        for i in student:
-            return f"ID: '{i.id}'", f"Name: '{i.name}'", f"CPF: '{i.cpf}'", f"Adress: '{i.adress}'", f"Phone Number: '{i.phone_number}'","\n"
+        return f"[ID: '{student.id}' Name: '{student.name}' CPF: '{student.cpf}' Adress: '{student.adress}' Phone Number: '{student.phone_number}']"
 
 class ControllerTeacher:
     def registerTeacher(nameRegister,cpfRegister,adressRegister,phone_numberRegister):
@@ -39,6 +43,7 @@ class ControllerTeacher:
                           phone_number = phone_numberRegister)
         
         session.add(teacher)
+        session.commit()
 
     def listAll():
 
@@ -46,25 +51,28 @@ class ControllerTeacher:
         result = []
 
         for i in teacherList:
-            result.append(f"ID: '{i.id}'", f"Name: '{i.name}'", f"CPF: '{i.cpf}'", f"Adress: '{i.adress}'", f"Phone Number: '{i.phone_number}'","\n")
+            result.append(f"[ID: '{i.id}' Name: '{i.name}' CPF: '{i.cpf}' Adress: '{i.adress}' Phone Number: '{i.phone_number}']")
 
-        return result
+        return "\n".join(result)
 
 class ControllerSubject:
-    def registerSubject(nameRegister,):
+    def registerSubject(nameRegister):
 
         subject = Subject(name = nameRegister)
         session.add(subject)
+        session.commit()
     
     def associateTeacher(teacher_id_Associate):
 
         teacher_associate = Subject(teacher_id = teacher_id_Associate)
         session.add(teacher_associate)
+        session.commit()
 
     def associateStudent(student_id_Associate):
 
         student_associate = Subject(student_id = student_id_Associate)
         session.add(student_associate)
+        session.commit()
 
     def listAll():
 
@@ -72,9 +80,9 @@ class ControllerSubject:
         result = []
 
         for i in subjectList:
-            result.append(f"ID: '{i.id}'", f"Name: '{i.name}'", f"Teacher_id: '{i.teacher_id}'", f"Student_id '{i.student_id}'\n")
+            result.append(f"[ID: '{i.id}' Name: '{i.name}' Teacher_id: '{i.teacher_id}' Student_id: '{i.student_id}']")
 
-        return result
+        return "\n".join(result)
 
 class ControllerGrade:
     def registerGrade(student_id_Register,subject_id_Register,subject_grade_1_sem_Register,subject_grade_2_sem_Register):
@@ -85,6 +93,7 @@ class ControllerGrade:
                       subject_grade_2_sem = subject_grade_2_sem_Register)
     
         session.add(grade)
+        session.commit()
 
     def alterGrade(grade_id, student_id_alter, subject_grade_1_bim_1_sem_alter, subject_grade_2_bim_1_sem_alter, subject_grade_1_bim_2_sem_alter, subject_grade_2_bim_2_sem_alter):
 
@@ -111,5 +120,3 @@ class ControllerSchoolCard:
 
     def listAll():
         pass
-
-session.commit()

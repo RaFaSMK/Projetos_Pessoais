@@ -9,7 +9,7 @@ BANCO = "cadastro_alunos"
 PORT = "5432"
 
 CONN = f"postgresql+psycopg2://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
-engine = create_engine(CONN, echo=True)
+engine = create_engine(CONN, echo=False)
 
 Base = declarative_base()
 
@@ -17,7 +17,7 @@ class Student(Base):
         __tablename__ = "student"
         id = Column(Integer(),primary_key=True)
         name = Column(String(50))
-        cpf = Column(Integer(),nullable=False)
+        cpf = Column(String(),nullable=False)
         adress = Column(String(100))
         phone_number = Column(Integer(),nullable=False)
 
@@ -25,7 +25,7 @@ class Teacher(Base):
         __tablename__ = "teacher"
         id = Column(Integer(),primary_key=True)
         name = Column(String(50))
-        cpf = Column(Integer(),nullable=False)
+        cpf = Column(String(),nullable=False)
         adress = Column(String(100))
         phone_number = Column(Integer(),nullable=False)
         
