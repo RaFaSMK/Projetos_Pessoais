@@ -2,18 +2,18 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
-USUARIO = "postgres"
+USUARIO = "postgres" #Constantes para a string de conexão
 SENHA = "250406"
 HOST = "localhost"
 BANCO = "cadastro_alunos"
 PORT = "5432"
 
-CONN = f"postgresql+psycopg2://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
-engine = create_engine(CONN, echo=False)
+CONN = f"postgresql+psycopg2://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}" #String de conexão utilizando o psycopg2 pois é o drive que conecta com o PostgreSQL
+engine = create_engine(CONN, echo=False) # Criação da engine, interface entre o ORM e o BD
 
-Base = declarative_base()
+Base = declarative_base() # Declarative base é uma classe base que todas as classes (tabelas) vão herdar
 
-class Student(Base):
+class Student(Base): # Cada classe que herda de Base, é uma tabela no BD
         __tablename__ = "student"
         id = Column(Integer(),primary_key=True)
         name = Column(String(50))

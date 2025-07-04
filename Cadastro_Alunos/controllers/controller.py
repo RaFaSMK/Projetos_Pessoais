@@ -6,7 +6,7 @@ session = Session()
 
 
 class ControllerStudent:
-    @staticmethod
+    @staticmethod # Metodo estático pois não usa o CLS ja que estou usando o BD
     def registerStudent(nameRegister,cpfRegister,adressRegister,phone_numberRegister):
 
         student = Student(name = nameRegister,
@@ -14,23 +14,23 @@ class ControllerStudent:
                           adress = adressRegister,
                           phone_number = phone_numberRegister)
         
-        session.add(student)
-        session.commit()
+        session.add(student) # Adiciona na camada session o novo valor para ser inserido no BD
+        session.commit() # Persiste a session no BD
 
     @staticmethod
     def listAll():
-        studentList = session.query(Student).all()
-        result = []
+        studentList = session.query(Student).all() # Retorna uma consulta de todos os valores da classe Student, que é a tabela "student"
+        result = [] # Lista para armazenar os valores
 
         for i in studentList:
             result.append(f"[ID: '{i.id}' Name: '{i.name}' CPF: '{i.cpf}' Adress: '{i.adress}' Phone Number: '{i.phone_number}']")
 
-        return "\n".join(result)
+        return "\n".join(result) # O Join concatena os elementos (str) da lista, e a sintaxe é separador.join(o iterável)
     
     @staticmethod
     def idSearch(student_id):
 
-        student = session.query(Student).filter(Student.id == student_id).first()
+        student = session.query(Student).filter(Student.id == student_id).first() # Agora a consulta tem um filtro pelo ID e retorna somente o primeiro, ja que é por ID, terá somente 1
 
         return f"[ID: '{student.id}' Name: '{student.name}' CPF: '{student.cpf}' Adress: '{student.adress}' Phone Number: '{student.phone_number}']"
 
