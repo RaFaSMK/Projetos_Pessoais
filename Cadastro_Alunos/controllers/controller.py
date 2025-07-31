@@ -25,7 +25,7 @@ class ControllerStudent:
         for i in studentList:
             result.append(f"[ID: '{i.id}' Name: '{i.name}' CPF: '{i.cpf}' Adress: '{i.adress}' Phone Number: '{i.phone_number}']") # Insere dentro da lista uma string formatada de cada elemento dentro do studenList
 
-        return "\n".join(result) # O Join concatena os elementos (str) da lista, e a sintaxe é separador.join(o iterável)
+        return "\n".join(result) # O Join concatena os elementos (str) da lista, e a sintaxe é separador.join(iterável)
     
     @staticmethod
     def idSearch(student_id):
