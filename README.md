@@ -6,7 +6,7 @@ Repositório com projetos desenvolvidos em Python com fins de aprendizado, prát
 ## 📂 Projetos
 
 ### 🔐 Sistema_Login_DB
-Sistema de login que armazena dados em banco de dados (MySQL) utilizando o ORM `SQLAlchemy`. Inclui cadastro de usuários, autenticação, armazenamento seguraro das senhas do usuário utilizando um sistema de hash de senha pela bilioteca `bcrypt` e verificação da segurança da senha.
+Sistema de login que armazena dados em banco de dados (MySQL) utilizando o ORM `SQLAlchemy`. Inclui cadastro de usuários, autenticação, armazenamento seguro das senhas do usuário utilizando um sistema de hash de senha pela bilioteca `bcrypt` e verificação da segurança da senha.
 
 ### 🔧 Automacao_Sobreaviso
 Facilita o processo de cadastro de sobreavisos no sistema interno da empresa automatizando o preenchimento a partir de dados contidos em uma planilha Excel. Utiliza openpyxl para leitura dos dados, requests para envio via HTTP e Babel para tratamento de datas. Faz login no sistema, formata datas corretamente e associa nomes a telefones a partir de um dicionário. Ideal para agilizar cadastros repetitivos e evitar erros manuais.
