@@ -8,6 +8,9 @@ Repositório com projetos desenvolvidos em Python com fins de aprendizado, prát
 ### 🔐 Sistema_Login_DB
 Sistema de login que armazena dados em banco de dados (MySQL) utilizando o ORM `SQLAlchemy`. Inclui cadastro de usuários, autenticação, armazenamento seguraro das senhas do usuário utilizando um sistema de hash de senha pela bilioteca `bcrypt` e verificação da segurança da senha.
 
+### 🔧 Automacao_Sobreaviso
+Facilita o processo de cadastro de sobreavisos no sistema interno da empresa automatizando o preenchimento a partir de dados contidos em uma planilha Excel. Utiliza openpyxl para leitura dos dados, requests para envio via HTTP e Babel para tratamento de datas. Faz login no sistema, formata datas corretamente e associa nomes a telefones a partir de um dicionário. Ideal para agilizar cadastros repetitivos e evitar erros manuais.
+
 ### 🔧 Automacao_Cadastro_Produtos
 Automatiza o processo de cadastro de produtos utilizando scripts Python, utilizando a bilioteca `pyautogui`.
 
@@ -40,10 +43,11 @@ Algumas pastas possuem a tag **Organizando Repositórios** ou **now**, indicando
   - `Kivy`
   - `Socketio`
   - `Simple Websocket`
-  - `pyautogui`
-  - `bcrypt`
+  - `Pyautogui`
+  - `Bcrypt`
   - `SQLAlchemy`
-  - entre outras conforme o projeto
+  - `Openpyxl`
+  - `Requests`
 
 ---
 
